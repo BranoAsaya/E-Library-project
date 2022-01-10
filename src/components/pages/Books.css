@@ -1,0 +1,77 @@
+.flex {
+  margin: 0;
+  display: flex;
+  border: 5px solid #333;
+  background-color: #fff;
+  margin-bottom: 2rem;
+
+}
+/* optional: alternately flips module layout 
+  .flex:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+  */
+.flex div:first-child {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+}
+
+.flex div:last-child {
+  margin: 2rem;
+  flex: 2;
+}
+.flex h3 {
+  font-size: 1.5rem;
+  margin-top: 0;
+  font-weight: 400;
+}
+.flex p {
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+          line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  
+}
+.flex p:last-of-type {
+  margin-bottom: 0;
+}
+.column {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 700px;
+}
+@media all and (max-width: 600px) {
+  body {
+    margin: 0;
+  }
+}
+@media all and (max-width: 450px) {
+  h2 {
+    margin: 1rem;
+  }
+  .flex {
+    border: 0;
+    margin: 0;
+    border-bottom: 2px solid #333;
+  }
+  .flex div:last-child {
+    margin: 1rem;
+  }
+  .column {
+    width: 100%;
+  }
+}
+@media all and (max-width: 400px) {
+  .flex {
+    flex-direction: column;
+  }
+  .flex div:first-child {
+    min-height: 200px;
+  }
+}

@@ -1,22 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import './Home.css'
 import LogOut from '../Form/LogOut'
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom'
 import Completed from './Completed'
 import Reading from './Reading'
 import Books from './Books'
-
+import { ImBooks } from 'react-icons/Im'
+import { AiOutlineMenuFold } from 'react-icons/ai'
+import NavBar from './NavBar'
 function Home({ state, dispatch }) {
+  const [menuBar, setMenuBar] = useState(true)
   const { email, password, isSign } = state
   const userJson = localStorage.getItem('email')
   const user = JSON.parse(userJson)
   return (
     <>
-      <LogOut state={state} dispatch={dispatch} />
-
       <BrowserRouter>
-        <Link to={'/'}>Books</Link>
-        <Link to={'/Reading'}>Reading</Link>
-        <Link to={'/Completed'}>Completed</Link>
+        <NavBar menuBar={menuBar} setMenuBar={setMenuBar} />
+        <LogOut state={state} dispatch={dispatch} />
 
         {user}
         <Switch>
@@ -35,6 +36,7 @@ function Home({ state, dispatch }) {
             path={'/Completed'}
             render={() => <Completed state={state} dispatch={dispatch} />}
           />
+          <Redirect to="/" />
         </Switch>
       </BrowserRouter>
     </>

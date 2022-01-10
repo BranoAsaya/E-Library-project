@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import API_FIREBASE from '../../api/api_key'
 import axios from 'axios'
+import './Books.css'
+import { BiMessageSquareAdd } from 'react-icons/bi';
+
 
 function Books({ state, dispatch }) {
   const [books, setBooks] = useState([])
@@ -36,38 +39,49 @@ function Books({ state, dispatch }) {
     }
     dispatch(action)
   }
-  const handelSubmit=(e)=>{
+  const handelSubmit = (e) => {
     e.preventDefault()
- const {search}= e.target
- const url = `https://www.googleapis.com/books/v1/volumes?q=${search.value}&key=${API_FIREBASE}&maxResults=40`
- axios
-   .get(url)
-   .then((response) => {
-     setBooks(response.data.items)
-   })
-   .catch((error) => {
-     console.log(error)
-   })
-   .then(() => {})
-
+    const { search } = e.target
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${search.value}&key=${API_FIREBASE}&maxResults=40`
+    axios
+      .get(url)
+      .then((response) => {
+        setBooks(response.data.items)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+      .then(() => {})
   }
+
   const booksList = books.map((book, i) => {
     if (book.volumeInfo.imageLinks?.thumbnail) {
       return (
-        <div key={i}>
-          <img key={book.id} src={book.volumeInfo.imageLinks.thumbnail} />
-          <p>{book.volumeInfo.title}</p>
-          <button onClick={() => addBookToList(i)}>ADD</button>
+        <div className="column" key={i}>
+          <figure className="flex">
+            <div
+              style={{
+                backgroundImage: `url(${book.volumeInfo.imageLinks.thumbnail})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'contain',
+              }}
+            />
+            <div>
+              <h3>{book.volumeInfo.title}</h3>
+              <p>{book.volumeInfo.authors}</p>
+              <p>{book.volumeInfo.description} </p>
+              <button onClick={() => addBookToList(i)}><BiMessageSquareAdd/></button>
+            </div>
+          </figure>
         </div>
       )
     }
   })
-  
 
   return (
     <div>
       <form onSubmit={handelSubmit}>
-        <input type="text" placeholder="SEARCH" name='search'/>
+        <input type="text" placeholder="SEARCH" name="search" />
         <input type="submit" />
       </form>
       <h1>Books</h1>
@@ -77,4 +91,3 @@ function Books({ state, dispatch }) {
 }
 
 export default Books
-

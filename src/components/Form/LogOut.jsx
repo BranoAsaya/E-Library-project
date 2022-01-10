@@ -1,4 +1,5 @@
 import React from 'react'
+import { BiLogOut } from 'react-icons/bi';
 
 function LogOut({ state, dispatch }) {
     return (
@@ -17,7 +18,7 @@ function LogOut({ state, dispatch }) {
               dispatch(action) 
           }
               
-          }>LOG OUT</button>  
+          }><BiLogOut/></button>  
         </>
     )
 }

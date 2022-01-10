@@ -52,12 +52,16 @@ function App() {
       <>
         <article className="article-container">
           <div className="container">
+            
             <form className="form-contact">
+            <br /> <br />
+
               <img
-                src="https://i.ibb.co/W3CknCy/book322.png"
+                src="https://i.ibb.co/fpv3HSt/open-book32355.png"
                 alt="book"
                 className="bookImg"
               />
+              <h1>BRANO E-Library</h1>
               <button
                 onClick={() => setFlag({ log: true, sign: false })}
                 className="form-contact-button"

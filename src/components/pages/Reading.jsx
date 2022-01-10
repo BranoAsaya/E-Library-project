@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { BsFillBookmarkCheckFill } from 'react-icons/bs';
 
 function Reading({ state, dispatch }) {
   const [newDetails, setNewDetails] = useState(false)
@@ -21,6 +22,7 @@ function Reading({ state, dispatch }) {
       value: BookParse,
     }
     dispatch(action)
+    removeBook(i)
   }
   const removeBook = (i) => {
     booksList.splice(i, 1)
@@ -46,15 +48,23 @@ function Reading({ state, dispatch }) {
   const readingList = booksList.map((book, i) => {
     if (book.volumeInfo.imageLinks?.thumbnail) {
       return (
-        <div key={i}>
-          <img
-            key={book.id}
-            src={book.volumeInfo.imageLinks.thumbnail}
-            onClick={() => showDetails(i)}
-          />
-          <p>{book.volumeInfo.title}</p>
-          <button onClick={() => addToCompleted(i)}>COMPLETED</button>
-          <button onClick={() => removeBook(i)}>DELETE</button>
+        <div className="column" key={i}>
+          <figure className="flex">
+            <div
+              style={{
+                backgroundImage: `url(${book.volumeInfo.imageLinks.thumbnail})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'contain',
+              }}
+              onClick={() => showDetails(i)}
+            />
+            <div>
+              <h3>{book.volumeInfo.title}</h3>
+              <p>{book.volumeInfo.authors}</p>
+              <p>{book.volumeInfo.description} </p>
+              <button onClick={() => addToCompleted(i)}><BsFillBookmarkCheckFill/></button>
+            </div>
+          </figure>
         </div>
       )
     }

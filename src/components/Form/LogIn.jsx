@@ -36,8 +36,9 @@ function LogIn({ state, dispatch }) {
 
   return (
     <>
-   
+    <article >
       <div className={'container'}>
+        <br /> <br />
         <h1>LogIn</h1>
         <form onSubmit={handelSubmit} className={'form-contact'}>
           <input
@@ -63,6 +64,7 @@ function LogIn({ state, dispatch }) {
           />
         </form>
       </div>
+      </article>
     </>
   )
 }

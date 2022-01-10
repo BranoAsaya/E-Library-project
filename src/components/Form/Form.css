@@ -44,20 +44,28 @@
   height: 40px;
   opacity: 0.8;
   cursor: pointer;
-  background: #27e7f5;
+  background: #202222;
   display: block;
   border: none;
-  border-bottom: 1px solid #07503a;
-  border-right: 1px solid #37f0c8;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  border-right: 1px solid hsl(160, 5%, 12%);
   transition: 1s;
 }
 .article-container{
   width: 100vw;
   height: 100vh;
-  background-image: url("https://i.ibb.co/z2cWf9J/Bookss2.png");
+  background-image: url('https://i.ibb.co/tbC2mn9/fewf3.png');
   background-size: cover;
 }
 .bookImg{
   margin: auto;
   opacity: 0.5;
+}
+h1{
+  color: #999999;
+font-family: arial, sans-serif;
+font-size: 16px;
+font-weight: bold;
+margin-top: 0px;
+margin-bottom: 1px;
 }

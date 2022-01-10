@@ -38,6 +38,8 @@ function SignUp({ state, dispatch }) {
   return (
     <>
       <div className={'container'}>
+      <br /> <br />
+
         <h1>SignUp</h1>
         <form onSubmit={handelSubmit} className={'form-contact'}>
           <input
