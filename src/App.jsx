@@ -80,7 +80,7 @@ function App() {
       </>
     )
   }
-  return <>{isSign ? <Home state={state} dispatch={dispatch} /> : logInBtn()}</>
+  return <><div className='top-div'>{isSign ? <Home state={state} dispatch={dispatch} /> : logInBtn()}</div></>
 }
 
 export default App

@@ -2,14 +2,20 @@ import React, { useEffect, useState } from 'react'
 import API_FIREBASE from '../../api/api_key'
 import axios from 'axios'
 import './Books.css'
-import { BiMessageSquareAdd } from 'react-icons/bi';
-
+import data from '../../../public/data.json'
+import { MdAddCircleOutline } from 'react-icons/md'
+import { MdAddCircle } from 'react-icons/md'
+import { FaSearch } from 'react-icons/fa'
+import { Spinner } from 'reactstrap'
 
 function Books({ state, dispatch }) {
   const [books, setBooks] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [icon, setIcon] = useState(false)
   const { reading } = state
   useEffect(() => {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=javascript&key=${API_FIREBASE}&maxResults=40`
+    setLoading(true)
+    const url = './data.json'
     axios
       .get(url)
       .then((response) => {
@@ -18,13 +24,14 @@ function Books({ state, dispatch }) {
       .catch((error) => {
         console.log(error)
       })
-      .then(() => {})
+      .then(() => {
+        setLoading(false)
+      })
   }, [])
   const addBookToList = (i) => {
     const redingList = [...books]
     const BooksJson = localStorage.getItem('reading')
     let BookList = JSON.parse(BooksJson)
-
     if (BooksJson === '[]') {
       BookList = new Array()
     }
@@ -38,6 +45,7 @@ function Books({ state, dispatch }) {
       value: BookList,
     }
     dispatch(action)
+    setIcon(i)
   }
   const handelSubmit = (e) => {
     e.preventDefault()
@@ -65,26 +73,32 @@ function Books({ state, dispatch }) {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'contain',
               }}
+              className='image-box'
             />
+
             <div>
               <h3>{book.volumeInfo.title}</h3>
               <p>{book.volumeInfo.authors}</p>
               <p>{book.volumeInfo.description} </p>
-              <button onClick={() => addBookToList(i)}><BiMessageSquareAdd/></button>
+              <button onClick={() => addBookToList(i)}>
+                {icon === i ? <MdAddCircle /> : <MdAddCircleOutline />}
+              </button>
             </div>
           </figure>
         </div>
       )
     }
   })
-
+  const showSpinner = loading ? <Spinner animation="grow" size="sm" /> : ''
   return (
-    <div>
-      <form onSubmit={handelSubmit}>
-        <input type="text" placeholder="SEARCH" name="search" />
-        <input type="submit" />
+    <div className="background-div">
+      <br /><br /><br />
+      <form className="search" onSubmit={handelSubmit}>
+        <input type="search" placeholder="Search here..." name="search" required />
+        <button type="submit"><FaSearch /></button>
       </form>
-      <h1>Books</h1>
+      
+      {showSpinner}
       {booksList}
     </div>
   )

@@ -49,6 +49,7 @@ function Completed({ state, dispatch }) {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'contain',
               }}
+              title="open details"
             />
             <div>
               <h3>{book.volumeInfo.title}</h3>
@@ -58,7 +59,7 @@ function Completed({ state, dispatch }) {
               <span> </span>
               <input
                 type="textarea"
-                value={comment[i]?.kind || ''}
+                value={comment[i]?.kind=== 'books#volume'? '':comment[i]?.kind || ''}
                 onChange={(e) => addComment(e, i)}
                 placeholder={'Add Comment'}
               />

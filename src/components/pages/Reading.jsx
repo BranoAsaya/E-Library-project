@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { BsFillBookmarkCheckFill } from 'react-icons/bs';
-
+import { BsBookmarkCheck } from 'react-icons/bs';
+import { IoMdCloseCircle } from 'react-icons/io';
+import { Spinner } from 'reactstrap';
+import './Books.css'
 function Reading({ state, dispatch }) {
   const [newDetails, setNewDetails] = useState(false)
   const { reading, complete, details } = state
@@ -11,7 +13,7 @@ function Reading({ state, dispatch }) {
     let BookParse = JSON.parse(BooksComplete)
     if (BooksComplete === '[]') {
       BookParse = new Array()
-    }
+    } 
     const book = booksList[i]
     BookParse.push(book)
     const jsonBook = JSON.stringify(BookParse)
@@ -24,6 +26,7 @@ function Reading({ state, dispatch }) {
     dispatch(action)
     removeBook(i)
   }
+
   const removeBook = (i) => {
     booksList.splice(i, 1)
     const jsonBook = JSON.stringify(booksList)
@@ -49,6 +52,7 @@ function Reading({ state, dispatch }) {
     if (book.volumeInfo.imageLinks?.thumbnail) {
       return (
         <div className="column" key={i}>
+
           <figure className="flex">
             <div
               style={{
@@ -57,12 +61,13 @@ function Reading({ state, dispatch }) {
                 backgroundSize: 'contain',
               }}
               onClick={() => showDetails(i)}
+              title="open details"
             />
             <div>
               <h3>{book.volumeInfo.title}</h3>
               <p>{book.volumeInfo.authors}</p>
               <p>{book.volumeInfo.description} </p>
-              <button onClick={() => addToCompleted(i)}><BsFillBookmarkCheckFill/></button>
+              <button onClick={() => addToCompleted(i)} title="finish"><BsBookmarkCheck/></button>
             </div>
           </figure>
         </div>
@@ -71,16 +76,18 @@ function Reading({ state, dispatch }) {
   })
   const bookDetails = newDetails ? (
     <>
-      <div>{newDetails.volumeInfo.description}</div>
-      <button onClick={() => setNewDetails(false)}>X</button>
+    <div className='details-con'>
+      <div>{details.volumeInfo.description}</div>
+      <button onClick={() => setNewDetails(false)}><IoMdCloseCircle/></button>
+     </div> 
     </>
   ) : (
     ''
   )
-  console.log(newDetails)
+  console.log(details);
   return (
     <div>
-      <h1>Reading</h1>
+  <h1>Reading</h1>
       {bookDetails}
       {readingList}
     </div>

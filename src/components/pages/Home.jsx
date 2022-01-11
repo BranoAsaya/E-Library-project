@@ -16,8 +16,12 @@ function Home({ state, dispatch }) {
   return (
     <>
       <BrowserRouter>
-        <NavBar menuBar={menuBar} setMenuBar={setMenuBar} />
-        <LogOut state={state} dispatch={dispatch} />
+        <NavBar
+          menuBar={menuBar}
+          setMenuBar={setMenuBar}
+          state={state}
+          dispatch={dispatch}
+        />
 
         {user}
         <Switch>
