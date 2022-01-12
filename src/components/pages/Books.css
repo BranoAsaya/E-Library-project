@@ -10,18 +10,19 @@
   box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
   backdrop-filter: blur(14px);
 }
-  .flex:nth-child(odd) {
-    flex-direction: row-reverse;
-  }
- 
+.flex:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
 .flex div:first-child {
   flex: 1;
   background-size: cover;
   background-position: center;
   margin: 10px;
-
 }
-
+.flex div {
+  cursor: pointer;
+}
 .flex div:last-child {
   margin: 2rem;
   flex: 2;
@@ -39,9 +40,8 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* number of lines to show */
-          line-clamp: 3; 
+  line-clamp: 3;
   -webkit-box-orient: vertical;
-  
 }
 .flex p:last-of-type {
   margin-bottom: 0;
@@ -57,7 +57,7 @@
   height: 40px;
   margin: 15px auto;
   background: #444;
-  background: rgba(0, 0, 0, .2);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   border: 1px solid #fff;
 }
@@ -97,14 +97,66 @@
 .search button:focus {
   outline: 0;
 }
+.image-box {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.image-box:hover {
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.details-con{
+  z-index: 5;
+  background-color: tomato;
+  width: 98vw;
+  height: 85vh;
+  position: fixed;
+  box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+  border-radius: 5px;
+  backdrop-filter: blur(14px);
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  
+}
+.div-details {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: right;
 
+}
+.description{
+  display: inline-flex;
+  align-items: flex-start;
+  width: 600px;
+  height: 150px;
+  overflow: auto;
+  text-align: justify;
+  padding: 20px;
+}
+.textarea-bv{
+  border: 1px solid rgb(5, 5, 5); 
+  background: none;
+}
+/* .btn{
+  width: 30px;
+  height: 30px;
+} */
+section:empty {
+  background-image: url("https://i.ibb.co/QH291d3/empty.png") ;
+  background-size: cover;
+ width: 98vw;
+ height: 80vh;
+}
 @media all and (max-width: 600px) {
   body {
     margin: 0;
   }
-  .search input{
+  .search input {
     width: 100px;
   }
+ 
 }
 @media all and (max-width: 450px) {
   h2 {
@@ -129,7 +181,7 @@
   .flex div:first-child {
     min-height: 200px;
   }
-  
+  .description{
+    width: 300px;
+  }
 }
-
-

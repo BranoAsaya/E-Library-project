@@ -13,7 +13,7 @@ function Home({ state, dispatch }) {
   const { email, password, isSign } = state
   const userJson = localStorage.getItem('email')
   const user = JSON.parse(userJson)
-  return (
+  return ( 
     <>
       <BrowserRouter>
         <NavBar

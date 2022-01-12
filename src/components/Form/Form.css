@@ -39,7 +39,7 @@
 .form-contact-submit {
   font-size: 18px;
   border-radius: 4px;
-  margin: auto; 
+  margin: auto;
   color: #fff;
   height: 40px;
   opacity: 0.8;
@@ -51,21 +51,21 @@
   border-right: 1px solid hsl(160, 5%, 12%);
   transition: 1s;
 }
-.article-container{
+.article-container {
   width: 100vw;
   height: 100vh;
   background-image: url('https://i.ibb.co/tbC2mn9/fewf3.png');
   background-size: cover;
 }
-.bookImg{
+.bookImg {
   margin: auto;
   opacity: 0.5;
 }
-h1{
+h1 {
   color: #999999;
-font-family: arial, sans-serif;
-font-size: 16px;
-font-weight: bold;
-margin-top: 0px;
-margin-bottom: 1px;
+  font-family: arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 1px;
 }

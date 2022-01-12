@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { BsBookmarkCheck } from 'react-icons/bs';
-import { IoMdCloseCircle } from 'react-icons/io';
-import { Spinner } from 'reactstrap';
+import { BsBookmarkCheck } from 'react-icons/bs'
+import { IoMdCloseCircle } from 'react-icons/io'
+import { Spinner } from 'reactstrap'
+import Details from './Details'
 import './Books.css'
+
 function Reading({ state, dispatch }) {
   const [newDetails, setNewDetails] = useState(false)
-  const { reading, complete, details } = state
+  const [flag, setFlag] = useState(false)
+  const { details } = state
   const BooksJson = localStorage.getItem('reading')
   const booksList = JSON.parse(BooksJson)
   const addToCompleted = (i) => {
@@ -13,7 +16,7 @@ function Reading({ state, dispatch }) {
     let BookParse = JSON.parse(BooksComplete)
     if (BooksComplete === '[]') {
       BookParse = new Array()
-    } 
+    }
     const book = booksList[i]
     BookParse.push(book)
     const jsonBook = JSON.stringify(BookParse)
@@ -26,7 +29,6 @@ function Reading({ state, dispatch }) {
     dispatch(action)
     removeBook(i)
   }
-
   const removeBook = (i) => {
     booksList.splice(i, 1)
     const jsonBook = JSON.stringify(booksList)
@@ -36,60 +38,57 @@ function Reading({ state, dispatch }) {
       value: booksList,
     }
     dispatch(action)
+    alert('book complete')
   }
-  const showDetails = (i) => {
-    const jsonBook = JSON.stringify(booksList[i])
-    localStorage.setItem('details', jsonBook)
+  const showDetails = (id) => {
+    setFlag(flag ? false : true)
+    const BooksDetails = JSON.parse(localStorage.getItem('details'))
+    console.log(BooksDetails);
+    const objBooks = BooksDetails.filter((book) => book.id === id)
     const action = {
-      input: 'details',
-      value: booksList[i],
+      input: 'info',
+      value: objBooks,
     }
     dispatch(action)
-    // setNewDetails(newDetails?false: booksList[i])
-    setNewDetails(booksList[i])
   }
   const readingList = booksList.map((book, i) => {
     if (book.volumeInfo.imageLinks?.thumbnail) {
       return (
         <div className="column" key={i}>
-
-          <figure className="flex">
+          <figure className="flex" >
             <div
               style={{
                 backgroundImage: `url(${book.volumeInfo.imageLinks.thumbnail})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'contain',
               }}
-              onClick={() => showDetails(i)}
               title="open details"
+              className="image-box"
+              onClick={() => showDetails(book.id)}
             />
             <div>
               <h3>{book.volumeInfo.title}</h3>
               <p>{book.volumeInfo.authors}</p>
               <p>{book.volumeInfo.description} </p>
-              <button onClick={() => addToCompleted(i)} title="finish"><BsBookmarkCheck/></button>
+              <button onClick={() => addToCompleted(i)} title="finish" className='btn'>
+                <BsBookmarkCheck />
+              </button>
             </div>
           </figure>
         </div>
       )
     }
   })
-  const bookDetails = newDetails ? (
-    <>
-    <div className='details-con'>
-      <div>{details.volumeInfo.description}</div>
-      <button onClick={() => setNewDetails(false)}><IoMdCloseCircle/></button>
-     </div> 
-    </>
-  ) : (
-    ''
-  )
-  console.log(details);
+
+  const detailsBook = flag ? <Details state={state} dispatch={dispatch} /> : ''
   return (
     <div>
-  <h1>Reading</h1>
-      {bookDetails}
-      {readingList}
+      <h1>Reading</h1>
+      <section>
+      {detailsBook}
+      {readingList}   
+      </section>
+     
     </div>
   )
 }

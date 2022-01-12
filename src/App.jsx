@@ -12,7 +12,7 @@ function App() {
   const emailJson = localStorage.getItem('email')
   const emailAuth = JSON.parse(emailJson)
   useEffect(() => {
-    if (emailAuth) {
+    if (emailAuth) {  
       const action = {
         input: 'isSign',
         value: true,
@@ -77,6 +77,7 @@ function App() {
             </form>
           </div>
         </article>
+        
       </>
     )
   }

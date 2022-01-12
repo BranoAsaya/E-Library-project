@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ImBooks } from 'react-icons/Im'
 import { AiOutlineMenuFold } from 'react-icons/ai'
-import { FaBookReader } from 'react-icons/fa';
-import { SiBookstack } from 'react-icons/si';
+import { FaBookReader } from 'react-icons/fa'
+import { SiBookstack } from 'react-icons/si'
 
 import LogOut from '../Form/LogOut'
-function NavBar({ menuBar, setMenuBar ,state, dispatch }) {
+function NavBar({ menuBar, setMenuBar, state, dispatch }) {
   return (
     <>
       <nav className={'navbar-top'}>
@@ -16,29 +16,25 @@ function NavBar({ menuBar, setMenuBar ,state, dispatch }) {
           />
         </span>
         <Link to={'/'} className={'logo'}>
-             <ImBooks />  Books E-Library
-            </Link>
+          <ImBooks /> Books E-Library
+        </Link>
         <ul className={menuBar ? 'main-nav' : 'active'} id={'js-menu'}>
           <li>
-          
             <Link to={'/Reading'} className={'nav-links'}>
-            <FaBookReader/>  
-            <span>   </span>
+              <FaBookReader />
+              <span> </span>
               Reading
             </Link>
           </li>
           <li>
-         
             <Link to={'/Completed'} className={'nav-links'}>
-              <SiBookstack/> 
-              <span>   </span>
+              <SiBookstack />
+              <span> </span>
               Completed
-              
             </Link>
           </li>
           <li>
-        <LogOut state={state} dispatch={dispatch} />
-
+            <LogOut state={state} dispatch={dispatch} />
           </li>
         </ul>
       </nav>

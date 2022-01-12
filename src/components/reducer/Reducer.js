@@ -4,4 +4,12 @@ export const Reducer = (state, action) => {
 
 
 }
-export const initialState = { email: '', password: '', isSign: false, reading: [], complete: [] ,details:{}}
+export const initialState = {
+    email: '',
+    password: '',
+    isSign: false,
+    reading: [],
+    complete: [],
+    details: [],
+    info: [],
+}

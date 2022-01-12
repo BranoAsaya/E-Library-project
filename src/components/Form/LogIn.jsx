@@ -36,34 +36,34 @@ function LogIn({ state, dispatch }) {
 
   return (
     <>
-    <article >
-      <div className={'container'}>
-        <br /> <br />
-        <h1>LogIn</h1>
-        <form onSubmit={handelSubmit} className={'form-contact'}>
-          <input
-            type="email"
-            placeholder="EMAIL"
-            onChange={handelChange}
-            autoComplete={'on'}
-            name={'email'}
-            className={'form-contact-input'}
-          />
-          <input
-            type="password"
-            placeholder="PASSWORD"
-            onChange={handelChange}
-            autoComplete={'on'}
-            name={'password'}
-            className={'form-contact-input'}
-          />
-          <input
-            type="submit"
-            value={'LOG IN'}
-            className={'form-contact-button'}
-          />
-        </form>
-      </div>
+      <article>
+        <div className={'container'}>
+          <br /> <br />
+          <h1>LogIn</h1>
+          <form onSubmit={handelSubmit} className={'form-contact'}>
+            <input
+              type="email"
+              placeholder="EMAIL"
+              onChange={handelChange}
+              autoComplete={'on'}
+              name={'email'}
+              className={'form-contact-input'}
+            />
+            <input
+              type="password"
+              placeholder="PASSWORD"
+              onChange={handelChange}
+              autoComplete={'on'}
+              name={'password'}
+              className={'form-contact-input'}
+            />
+            <input
+              type="submit"
+              value={'LOG IN'}
+              className={'form-contact-button'}
+            />
+          </form>
+        </div>
       </article>
     </>
   )

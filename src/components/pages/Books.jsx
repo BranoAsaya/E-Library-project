@@ -7,12 +7,15 @@ import { MdAddCircleOutline } from 'react-icons/md'
 import { MdAddCircle } from 'react-icons/md'
 import { FaSearch } from 'react-icons/fa'
 import { Spinner } from 'reactstrap'
+import Details from './Details'
 
 function Books({ state, dispatch }) {
   const [books, setBooks] = useState([])
   const [loading, setLoading] = useState(false)
   const [icon, setIcon] = useState(false)
-  const { reading } = state
+  const [flag, setFlag] = useState(false)
+
+  const { reading, details } = state
   useEffect(() => {
     setLoading(true)
     const url = './data.json'
@@ -20,6 +23,12 @@ function Books({ state, dispatch }) {
       .get(url)
       .then((response) => {
         setBooks(response.data.items)
+        const action = {
+          input: 'details',
+          value: response.data.items,
+        }
+
+        dispatch(action)
       })
       .catch((error) => {
         console.log(error)
@@ -46,6 +55,7 @@ function Books({ state, dispatch }) {
     }
     dispatch(action)
     setIcon(i)
+    alert('book add')
   }
   const handelSubmit = (e) => {
     e.preventDefault()
@@ -61,7 +71,22 @@ function Books({ state, dispatch }) {
       })
       .then(() => {})
   }
-
+  const showDetails = (id,i) => {
+    setFlag(flag ? false : true)
+    
+    const BooksDetails = JSON.parse(localStorage.getItem('details'))
+    const objBooks = BooksDetails.filter((book) => book.id === id) 
+  
+    if(objBooks.length){
+    const action = {input: 'info',value: objBooks,}
+    dispatch(action)
+    }
+   else{
+     console.log('in');
+    const action = {input: 'info',value: [books[i]],}
+    dispatch(action)
+   }
+  }
   const booksList = books.map((book, i) => {
     if (book.volumeInfo.imageLinks?.thumbnail) {
       return (
@@ -73,31 +98,52 @@ function Books({ state, dispatch }) {
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'contain',
               }}
-              className='image-box'
+              className="image-box"
+              onClick={() => showDetails(book.id,i)}
             />
 
             <div>
               <h3>{book.volumeInfo.title}</h3>
               <p>{book.volumeInfo.authors}</p>
               <p>{book.volumeInfo.description} </p>
-              <button onClick={() => addBookToList(i)}>
+              <button onClick={() => addBookToList(i)} title={'add to read'} className='btn'>
                 {icon === i ? <MdAddCircle /> : <MdAddCircleOutline />}
               </button>
             </div>
+            
           </figure>
         </div>
       )
     }
   })
+
+  const jsonBook = JSON.stringify(details)
+  const jsonDetails = localStorage.getItem('details')
+  if (jsonDetails === '[]') {
+    localStorage.setItem('details', jsonBook)
+  }
+
+  const detailsBook = flag ? <Details state={state} dispatch={dispatch} /> : ''
   const showSpinner = loading ? <Spinner animation="grow" size="sm" /> : ''
   return (
     <div className="background-div">
-      <br /><br /><br />
+      <br />
+      <br />
+      {detailsBook}
+      <br />
+
       <form className="search" onSubmit={handelSubmit}>
-        <input type="search" placeholder="Search here..." name="search" required />
-        <button type="submit"><FaSearch /></button>
+        <input
+          type="search"
+          placeholder="Search here..."
+          name="search"
+          required
+        />
+        <button type="submit">
+          <FaSearch />
+        </button>
       </form>
-      
+
       {showSpinner}
       {booksList}
     </div>
