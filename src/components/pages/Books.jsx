@@ -37,13 +37,15 @@ function Books({ state, dispatch }) {
         setLoading(false)
       })
   }, [])
-  const addBookToList = (i) => {
+  const addBookToList = (i, id) => {
     const redingList = [...books]
     const BooksJson = localStorage.getItem('reading')
     let BookList = JSON.parse(BooksJson)
     if (BooksJson === '[]') {
       BookList = new Array()
     }
+    const index = BookList.findIndex((book) => book.id === id)
+    if (!index) return alert('book in reading')
     const book = redingList[i]
     BookList.push(book)
     const jsonBook = JSON.stringify(BookList)
@@ -71,21 +73,19 @@ function Books({ state, dispatch }) {
       })
       .then(() => {})
   }
-  const showDetails = (id,i) => {
+  const showDetails = (id, i) => {
     setFlag(flag ? false : true)
-    
+
     const BooksDetails = JSON.parse(localStorage.getItem('details'))
-    const objBooks = BooksDetails.filter((book) => book.id === id) 
-  
-    if(objBooks.length){
-    const action = {input: 'info',value: objBooks,}
-    dispatch(action)
+    const objBooks = BooksDetails.filter((book) => book.id === id)
+
+    if (objBooks.length) {
+      const action = { input: 'info', value: objBooks }
+      dispatch(action)
+    } else {
+      const action = { input: 'info', value: [books[i]] }
+      dispatch(action)
     }
-   else{
-     console.log('in');
-    const action = {input: 'info',value: [books[i]],}
-    dispatch(action)
-   }
   }
   const booksList = books.map((book, i) => {
     if (book.volumeInfo.imageLinks?.thumbnail) {
@@ -99,18 +99,21 @@ function Books({ state, dispatch }) {
                 backgroundSize: 'contain',
               }}
               className="image-box"
-              onClick={() => showDetails(book.id,i)}
+              onClick={() => showDetails(book.id, i)}
             />
 
             <div>
               <h3>{book.volumeInfo.title}</h3>
               <p>{book.volumeInfo.authors}</p>
               <p>{book.volumeInfo.description} </p>
-              <button onClick={() => addBookToList(i)} title={'add to read'} className='btn'>
+              <button
+                onClick={() => addBookToList(i, book.id)}
+                title={'add to read'}
+                className="btn"
+              >
                 {icon === i ? <MdAddCircle /> : <MdAddCircleOutline />}
               </button>
             </div>
-            
           </figure>
         </div>
       )

@@ -124,7 +124,6 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
-
 }
 .description{
   display: inline-flex;
@@ -156,7 +155,21 @@ section:empty {
   .search input {
     width: 100px;
   }
- 
+  .div-details {
+    background-size: 20vw 22vh;
+    background-position: top;
+    background-position-x: right;
+  }
+
+}
+@media all and (max-width: 780px) {
+
+  .div-details {
+    background-size: 17vw 22vh;
+    background-position: top;
+    background-position-x: right;
+  }
+
 }
 @media all and (max-width: 450px) {
   h2 {
@@ -184,4 +197,5 @@ section:empty {
   .description{
     width: 300px;
   }
+
 }

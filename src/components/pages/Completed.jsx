@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { BsFillBookmarkDashFill, BsBookmarkStar } from 'react-icons/bs'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import Details from './Details'
 
 function Completed({ state, dispatch }) {
